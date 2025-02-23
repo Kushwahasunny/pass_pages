@@ -1,0 +1,482 @@
+// // // // import React, { useState } from 'react';
+// // // // import DatePicker from 'react-datepicker';
+// // // // import "react-datepicker/dist/react-datepicker.css"; // Import the styles
+// // // // const MyDatePicker = () => {
+// // // //     const [startDate, setStartDate] = useState(new Date()); // Default date to today
+  
+// // // //     const handleDateChange = (date) => {
+// // // //       setStartDate(date); // Update the date when the user selects a new one
+// // // //     };
+  
+// // // //     console.log(startDate,"startdate")
+// // // //     return (
+// // // //       <div>
+// // // //         <h2>Select a Date:</h2>
+// // // //         <DatePicker 
+// // // //           selected={startDate} // Current selected date
+// // // //           onChange={handleDateChange} // Handler for date change
+// // // //           dateFormat="MMMM d, yyyy" // Format the date display
+// // // //           placeholderText="Click to select a date" // Optional placeholder text
+// // // //         />
+// // // //       </div>
+// // // //     );
+// // // //   };
+  
+// // // //   export default MyDatePicker;
+// // // import React, { useState } from 'react';
+// // // import ReactDOM from 'react-dom';
+// // // import DatePicker from 'react-datepicker';
+// // // import "react-datepicker/dist/react-datepicker.css"; // Import the styles
+
+// // // const MyDatePicker = () => {
+// // //   const calendar = [
+// // //     {
+// // //       month: 1,  // January
+// // //       days: [
+// // //         { day: 5, price: 85 },
+// // //         { day: 9, price: 98 },
+// // //         { day: 17, price: 5 },
+// // //       ]
+// // //     },
+// // //     {
+// // //       month: 2,  // February
+// // //       days: [
+// // //         { day: 4, price: 69 },
+// // //         { day: 26, price: 123 },
+// // //         { day: 28, price: 85 },
+// // //       ]
+// // //     }
+// // //   ];
+
+// // //   // Mapping of day-to-price
+// // //   const priceMap = {};
+// // //   calendar.forEach(monthData => {
+// // //     monthData.days.forEach(dayData => {
+// // //       priceMap[`${monthData.month}-${dayData.day}`] = dayData.price;
+// // //     });
+// // //   });
+
+// // //   const [startDate, setStartDate] = useState(null); // Selected date
+// // //   const [price, setPrice] = useState(null); // Price to display when a date is selected
+
+// // //   const handleDateChange = (date) => {
+// // //     setStartDate(date);
+// // //     const day = date.getDate();
+// // //     const month = date.getMonth() + 1; // month is 0-indexed, so add 1
+// // //     const key = `${month}-${day}`;
+// // //     setPrice(priceMap[key] || null); // Set the price for the selected date
+// // //   };
+
+// // //   const isDateEnabled = (date) => {
+// // //     const day = date.getDate();
+// // //     const month = date.getMonth() + 1;
+// // //     const key = `${month}-${day}`;
+// // //     return priceMap[key] !== undefined; // Only enable days that exist in the calendar
+// // //   };
+
+// // //   // Custom render of day cell with price
+// // //   const renderDayWithPrice = (date) => {
+// // //     const day = date.getDate();
+// // //     const month = date.getMonth() + 1;
+// // //     const key = `${month}-${day}`;
+// // //     const priceForDay = priceMap[key];
+
+// // //     if (priceForDay) {
+// // //       return (
+// // //         <div className="custom-day">
+// // //           <span>{day}</span>
+// // //           <div className="price">${priceForDay}</div>
+// // //         </div>
+// // //       );
+// // //     }
+// // //     return day; // Just display the day if no price
+// // //   };
+
+// // //   return (
+// // //     <div style={{ padding: '20px' }}>
+// // //       <h2>Select a Date:</h2>
+// // //       <DatePicker
+// // //         selected={startDate}
+// // //         onChange={handleDateChange}
+// // //         dateFormat="MMMM d, yyyy"
+// // //         placeholderText="Click to select a date"
+// // //         filterDate={isDateEnabled} // Only allow specific dates to be selected
+// // //         renderDayContents={renderDayWithPrice} // Custom rendering of days with price
+// // //       />
+// // //       {price !== null && (
+// // //         <div style={{ marginTop: '10px', fontSize: '18px', color: 'green' }}>
+// // //           Price for the selected day: ${price}
+// // //         </div>
+// // //       )}
+// // //     </div>
+// // //   );
+// // // };
+
+
+// // // export default MyDatePicker
+
+
+// //     import React, { useState } from 'react';
+// //     import ReactDOM from 'react-dom';
+// //     import DatePicker from 'react-datepicker';
+// //     import "react-datepicker/dist/react-datepicker.css"; // Import the styles
+
+// //     const MyDatePicker = () => {
+// //     const calendar = [
+// //         {
+// //         month: 1,  // January
+// //         days: [
+// //             { day: 5, price: 85 },
+// //             { day: 9, price: 98 },
+// //             { day: 17, price: 5 },
+// //         ]
+// //         },
+// //         {
+// //         month: 2,  // February
+// //         days: [
+// //             { day: 4, price: 69 },
+// //             { day: 26, price: 123 },
+// //             { day: 28, price: 85 },
+// //         ]
+// //         }
+// //     ];
+
+// //     const priceMap = {}; // Mapping to store day-to-price relation
+// //     calendar.forEach(monthData => {
+// //         monthData.days.forEach(dayData => {
+// //         priceMap[`${monthData.month}-${dayData.day}`] = dayData.price;
+// //         });
+// //     });
+
+// //     const [startDate, setStartDate] = useState(null); // Default selected date is null
+// //     const [price, setPrice] = useState(null); // Price to display when a date is selected
+
+// //     const handleDateChange = (date) => {
+// //         setStartDate(date);
+// //         const day = date.getDate();
+// //         const month = date.getMonth() + 1; // month is 0-indexed, so add 1
+// //         const key = `${month}-${day}`;
+// //         setPrice(priceMap[key] || null); // Get the price for the selected date
+// //     };
+
+// //     const isDateEnabled = (date) => {
+// //         const day = date.getDate();
+// //         const month = date.getMonth() + 1; // month is 0-indexed, so add 1
+// //         const key = `${month}-${day}`;
+// //         return priceMap[key] !== undefined; // Only enable the dates that are in the calendar
+// //     };
+
+// //     return (
+// //         <div style={{ padding: '20px' }}>
+// //         <h2>Select a Date:</h2>
+// //         <DatePicker
+// //             selected={startDate}
+// //             onChange={handleDateChange}
+// //             dateFormat="MMMM d, yyyy"
+// //             placeholderText="Click to select a date"
+// //             filterDate={isDateEnabled} // Filter to enable only valid dates
+// //         />
+// //         {price !== null && (
+// //             <div style={{ marginTop: '10px', fontSize: '18px', color: 'green' }}>
+// //             Price: ${price}
+// //             </div>
+// //         )}
+// //         </div>
+// //     );
+// //     };
+
+    
+
+// //     export default MyDatePicker
+
+
+// import React, { useState } from 'react';
+// import ReactDOM from 'react-dom';
+// import DatePicker from 'react-datepicker';
+// import "react-datepicker/dist/react-datepicker.css"; // Import the styles
+
+// const MyDatePicker = () => {
+//   const calendar = [
+//     {
+//       month: 1,  // January
+//       days: [
+//         { day: 5, price: 85 },
+//         { day: 9, price: 98 },
+//         { day: 17, price: 5 },
+//       ]
+//     },
+//     {
+//       month: 2,  // February
+//       days: [
+//         { day: 5, price: 85 },
+//         { day: 9, price: 98 },
+//         { day: 17, price: 5 },
+//         { day: 4, price: 69 },
+//         { day: 26, price: 123 },
+//         { day: 28, price: 85 },
+//       ]
+//     }
+//   ];
+
+//   const priceMap = {}; // Mapping to store day-to-price relation
+//   calendar.forEach(monthData => {
+//     monthData.days.forEach(dayData => {
+//       priceMap[`${monthData.month}-${dayData.day}`] = dayData.price;
+//     });
+//   });
+
+//   const [startDate, setStartDate] = useState(null); // Default selected date is null
+//   const [price, setPrice] = useState(null); // Price to display when a date is selected
+
+//   const handleDateChange = (date) => {
+//     setStartDate(date);
+//     const day = date.getDate();
+//     const month = date.getMonth() + 1; // month is 0-indexed, so add 1
+//     const key = `${month}-${day}`;
+//     setPrice(priceMap[key] || null); // Get the price for the selected date
+//   };
+
+//   const isDateEnabled = (date) => {
+//     const day = date.getDate();
+//     const month = date.getMonth() + 1; // month is 0-indexed, so add 1
+//     const key = `${month}-${day}`;
+//     return priceMap[key] !== undefined; // Only enable the dates that are in the calendar
+//   };
+
+//   const dayClassName = (date) => {
+//     const day = date.getDate();
+//     const month = date.getMonth() + 1; // month is 0-indexed, so add 1
+//     const key = `${month}-${day}`;
+//     return priceMap[key] ? 'has-price' : ''; // Apply 'has-price' class if there's a price
+//   };
+
+//   const renderDayContents = (day, date) => {
+//     const dayString = `${date.getMonth() + 1}-${day}`;
+//     const priceForDay = priceMap[dayString];
+//     return (
+//       <div style={{ textAlign: 'center' }}>
+//         <div>{day}</div>
+//         {priceForDay && <div style={{ fontSize: '12px', color: 'green' }}>${priceForDay}</div>}
+//       </div>
+//     );
+//   };
+
+//   return (
+//     <div style={{ padding: '20px' }}>
+//       <h2>Select a Date:</h2>
+//       <DatePicker
+//         selected={startDate}
+//         onChange={handleDateChange}
+//         dateFormat="MMMM d, yyyy"
+//         placeholderText="Click to select a date"
+//         filterDate={isDateEnabled} // Filter to enable only valid dates
+//         dayClassName={dayClassName} // Apply special class to days with prices
+//         renderDayContents={renderDayContents} // Custom render to show price inside day
+//       />
+//       {price !== null && (
+//         <div style={{ marginTop: '10px', fontSize: '18px', color: 'green' }}>
+//           Price: ${price}
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default MyDatePicker;
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css"; // Import the styles
+
+const MyDatePicker = () => {
+  const calendar = [
+    {
+      month: 1,  // January
+      days: [
+        { day: 5, price: 85 },
+        { day: 9, price: 98 },
+        { day: 17, price: 5 },
+      ]
+    },
+    {
+      month: 2,  // February
+      days: [
+        { day: 5, price: 85 },
+        { day: 9, price: 98 },
+        { day: 17, price: 5 },
+        { day: 4, price: 69 },
+        { day: 26, price: 123 },
+        { day: 28, price: 85 },
+      ]
+    }
+  ];
+
+  const priceMap = {}; // Mapping to store day-to-price relation
+  calendar.forEach(monthData => {
+    monthData.days.forEach(dayData => {
+      priceMap[`${monthData.month}-${dayData.day}`] = dayData.price;
+    });
+  });
+
+  const [startDate, setStartDate] = useState(null); // Default selected date is null
+  const [price, setPrice] = useState(null); // Price to display when a date is selected
+  const [monthHeight, setMonthHeight] = useState('auto'); // Dynamic height for month
+
+  const handleDateChange = (date) => {
+    setStartDate(date);
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // month is 0-indexed, so add 1
+    const key = `${month}-${day}`;
+    setPrice(priceMap[key] || null); // Get the price for the selected date
+  };
+
+  const isDateEnabled = (date) => {
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // month is 0-indexed, so add 1
+    const key = `${month}-${day}`;
+    return priceMap[key] !== undefined; // Only enable the dates that are in the calendar
+  };
+
+  const dayClassName = (date) => {
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // month is 0-indexed, so add 1
+    const key = `${month}-${day}`;
+    return priceMap[key] ? 'has-price' : ''; // Apply 'has-price' class if there's a price
+  };
+
+  const renderDayContents = (day, date) => {
+    const dayString = `${date.getMonth() + 1}-${day}`;
+    const priceForDay = priceMap[dayString];
+    return (
+      <div style={{ textAlign: 'center' }}>
+        <div>{day}</div>
+        {priceForDay && <div style={{ fontSize: '12px', color: 'green' }}>${priceForDay}</div>}
+      </div>
+    );
+  };
+
+  const handleMonthChange = (date) => {
+    // Dynamically change the height based on the number of days in the month
+    const month = date.getMonth();
+    const daysInMonth = new Date(date.getFullYear(), month + 1, 0).getDate();
+
+    // Adjust the height based on the number of days in the month
+    if (daysInMonth === 31) {
+      setMonthHeight('350px');
+    } else if (daysInMonth === 30) {
+      setMonthHeight('330px');
+    } else if (daysInMonth === 28) {
+      setMonthHeight('300px');
+    } else {
+      setMonthHeight('auto');
+    }
+  };
+
+  useEffect(() => {
+    if (startDate) {
+      handleMonthChange(startDate);
+    }
+  }, [startDate]);
+
+  return (
+    <div style={{ padding: '20px' }}>
+      <h2>Select a Date:</h2>
+      <DatePicker
+        selected={startDate}
+        onChange={handleDateChange}
+        onMonthChange={handleMonthChange}
+        dateFormat="MMMM d, yyyy"
+        placeholderText="Click to select a date"
+        filterDate={isDateEnabled} // Filter to enable only valid dates
+        dayClassName={dayClassName} // Apply special class to days with prices
+        renderDayContents={renderDayContents} // Custom render to show price inside day
+        popperModifiers={{
+          offset: {
+            enabled: true,
+            offset: '0, 10px',
+          },
+        }}
+        calendarClassName="custom-datepicker" // Custom calendar class for styling
+      />
+      {price !== null && (
+        <div style={{ marginTop: '10px', fontSize: '18px', color: 'green' }}>
+          Price: ${price}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default MyDatePicker;
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+.has-price {
+  background-color: #f0f0f0;
+  border-radius: 50%;
+}
+
+.has-price .react-datepicker__day {
+  position: relative;
+}
+
+.has-price .react-datepicker__day:hover {
+  cursor: pointer;
+  background-color: lightblue;
+}
+
+.react-datepicker__day {
+  padding: 5px;
+  font-size: 14px;
+}
+
+.react-datepicker__day--selected {
+  background-color: #4CAF50; /* Selected day background color */
+}
+
+.custom-datepicker .react-datepicker__month {
+  height: var(--month-height, auto); /* Use the dynamic height */
+  transition: height 0.3s ease;
+}
+
